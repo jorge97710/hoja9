@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -47,6 +49,26 @@ public class Diccionario {
 	public static void main(String[] args)
 
 	{
+		
+		System.out.println("Bienvenido al diccionario");
+		System.out.println("¿Que implementacion desea usar (SP/HS)?");
+		Scanner reader = new Scanner(System.in); // Reading from System.in
+		String opc = reader.nextLine();
+
+		if (opc.equalsIgnoreCase("SP")){
+			creadorsplay creadorsplay = productfactory.splay();
+			SplayBST<String,String> palabras = creadorsplay.crearsplay();
+			
+
+
+		}else if(opc.equalsIgnoreCase("HS")){
+			creadorhash creadorhash = productfactory.hash();
+			HashMap<String,String> palabras = creadorhash.creadorhash();
+			
+		}else{
+			System.out.println("tipo invalido");
+			
+		}
 		Diccionario di = new Diccionario();
 
 		di.crear("C:\\Users\\JorgeAndres\\Desktop\\Hola.txt");
@@ -114,7 +136,7 @@ public class Diccionario {
 	 * @param dir
 	 *            Es el directorio donde se encuentra el archivo que las tiene
 	 */
-	void crear(String dir) {
+	 void crear(String dir) {
 		int largo, contador;
 		String txt1 = "", txt2, j;
 		for (String i : leerContenido(dir)) {
@@ -126,6 +148,8 @@ public class Diccionario {
 					cole.insertar(txt1, txt2);
 					cole2.insertar(txt1, j);
 					arbol.agregarNodo(txt1);
+
+					
 				} else {
 					txt1 += i.charAt(contador);
 				}
@@ -134,6 +158,30 @@ public class Diccionario {
 			txt2 = "";
 		}
 	}
+	 
+	 void crearnuevo(String dir) {
+			int largo, contador;
+			String txt1 = "", txt2, j;
+			for (String i : leerContenido(dir)) {
+			
+				j = i;
+				largo = i.length();
+				for (contador = 1; contador < largo - 2; contador++) {
+					if (i.charAt(contador) == ',') {
+						txt2 = i.substring(contador + 1, largo - 1);
+						cole.insertar(txt1, txt2);
+						cole2.insertar(txt1, j);
+						arbol.agregarNodo(txt1);
+
+						
+					} else {
+						txt1 += i.charAt(contador);
+					}
+				}
+				txt1 = "";
+				txt2 = "";
+			}
+		}
 
 	/**
 	 * Metodo que ordena de forma "in-order" todos los nodos del arbol. Luego de
