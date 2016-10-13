@@ -160,26 +160,28 @@ public class Diccionario {
 	}
 	 
 	 void crearnuevo(String dir) {
-			int largo, contador;
+			int largo, contador,comas = 0,nc=0,nn=0;
 			String txt1 = "", txt2, j;
 			for (String i : leerContenido(dir)) {
-			
+			if(i.charAt(0)!='#'){
 				j = i;
 				largo = i.length();
-				for (contador = 1; contador < largo - 2; contador++) {
-					if (i.charAt(contador) == ',') {
-						txt2 = i.substring(contador + 1, largo - 1);
-						cole.insertar(txt1, txt2);
-						cole2.insertar(txt1, j);
-						arbol.agregarNodo(txt1);
+				int finingles=i.indexOf(' ');
+				int inicioesp=i.indexOf('a');
+				
+						txt1 = i.substring(0, finingles).trim(); //la palabra en ingles es desde 0 hasta el primer espacio
+						//palabras.put(txt1,txt2);
+					 
+						txt2 = i.substring(1, nc).trim(); //la palabra en español es desde contador hasta el lugar actual
 
-						
-					} else {
-						txt1 += i.charAt(contador);
-					}
-				}
+					
+				
 				txt1 = "";
 				txt2 = "";
+			}else{
+				
+			}
+				
 			}
 		}
 
