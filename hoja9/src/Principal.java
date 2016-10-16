@@ -188,13 +188,25 @@ public class Principal {
 				else {
 						tipo2 = JOptionPane.showInputDialog("Ingrese el irectorio: ");
 						dic.leerContenido(tipo2);
-						dic.llenarHash();
+						if(tipo.equals("HS")){
+							dic.llenarHash();
+						}
+						else if(tipo.equals("SP")){
+							dic.llenarArbol();
+						}
+						
 					
 				}
 			}
 			//Desplegar resultados
 			if (e.getSource() == btnMostrarResultados) {
-				System.out.println(dic.buscarArbol(txtNombrea.getText()));
+				if(tipo.equals("HS")){
+					System.out.println(dic.buscarHash(txtNombrea.getText()));	
+				}
+				else if (tipo.equals("SP")){
+					System.out.println(dic.buscarArbol(txtNombrea.getText()));	
+				}
+				
 			}
 		}
 	}

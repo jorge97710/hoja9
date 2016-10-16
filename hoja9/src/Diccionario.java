@@ -79,14 +79,27 @@ public class Diccionario {
 	 * Llena el SplayTree
 	 */
 	void llenarArbol(){
-		String string = "004-034556";
-		String[] parts = string.split(" ");
-		String part1,part2;
+		String[] parts;
+		int co=0;
+		String part1="",part2="";
 		for (String i: array){
-			parts = i.split(" ");
-			part1 = parts[0];
-			part2 = parts[1];
+			
+			for (int j=0;j<i.length();j++){
+				char c = i.charAt(j);
+				if (Character.isLetter(c)){
+					part1+=c;
+				}
+				else{
+					co=j;
+					break;
+					
+				}
+			}
+			part2=i.substring(co);
+			//System.out.println("1"+part1);
+			//System.out.println("2"+part2);
 			miMapeo.put(part1,part2);
+			part1="";
 		}
 	}
 	/**
@@ -111,17 +124,22 @@ public class Diccionario {
 		String part1="",part2="";
 		for (String i: array){
 			
-			for (int j=0;j<i.indexOf(" ");j++){
+			for (int j=0;j<i.length();j++){
 				char c = i.charAt(j);
 				if (Character.isLetter(c)){
 					part1+=c;
 				}
-				else{	
+				else{
+					co=j;
+					break;
+					
 				}
 			}
-			part2=i.substring(i.indexOf(" "));
-			System.out.println("1"+part1);
-			System.out.println("2"+part2);
+			part2=i.substring(co);
+			//System.out.println("1"+part1);
+			//System.out.println("2"+part2);
+			miMapeo.put(part1,part2);
+			part1="";
 			//parts = i.split(" ",2);
 			
 			//part1 = parts[0];
@@ -129,7 +147,7 @@ public class Diccionario {
 			//System.out.println(parts[1]);
 			//part2 = parts[1];
 			//System.out.println("2"+part2);
-			//miMapeo.put(part1,part2);
+			
 		}
 	}
 	
