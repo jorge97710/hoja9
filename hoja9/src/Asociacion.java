@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @param <K> Llave
  * @param <V> Valor
  */
-public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo {
+public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo<K,V> {
 
 	private HashMap<K, V> dic;
 
@@ -61,7 +61,10 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo {
 	 * @param key  Es la llave a la cual se le asocia un valor
 	 * @param value Es el valor a ingresar como asociado a la llave
 	 */
-	public void insertar(K key, V value) {
+
+	@Override
+	public void put(K key, V value) {
 		dic.put(key, value);
+		
 	}
 }

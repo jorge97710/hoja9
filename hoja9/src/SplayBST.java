@@ -9,9 +9,10 @@
  *  key prior to that operation.
  *
  *  Written by Josh Israel.
+ * @param <K>
  *
  ******************************************************************************/
-public class SplayBST<Key extends Comparable<Key>, Value> implements Mapeo {
+public class SplayBST<Key extends Comparable<Key>, Value> implements Mapeo<Key,Value> {
 
     private Node root;   // root of the BST
 

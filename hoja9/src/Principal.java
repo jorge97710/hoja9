@@ -9,6 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
 /**
  * @author Carlos Calderon, 15219
  * @author Jorge Azmitia,15202
@@ -17,7 +24,7 @@ import javax.swing.JFrame;
  */
 public class Principal {
 	/*Atributos*/
-	static String tipo = "";
+	static String tipo = "",tipo2="";
 	public boolean opcion = false, opcion1 = false, opcion2 = false;
 	private JButton btnEnviar, btnMostrarResultados;
 	private JFrame frame;
@@ -25,8 +32,10 @@ public class Principal {
 	private JCheckBox chckbxJava = new JCheckBox("");
 	private JCheckBox chckbxWeb = new JCheckBox("");
 	private int id = 0;
+	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbtnNewRadioButton_1;
+	private static Diccionario dic = new Diccionario()  ;
 	
-
 	/**
 	 * Correr el programa 
 	 */
@@ -39,7 +48,7 @@ public class Principal {
 				"Datos necesarios", JOptionPane.INFORMATION_MESSAGE);
 		tipo = JOptionPane.showInputDialog("Ingrese el tipo: ");
 		defensiva(tipo);
-		listo(tipo); 
+		dic.listo(tipo); 
 		Principal window = new Principal();
 		window.frame.setVisible(true);
 
@@ -60,42 +69,78 @@ public class Principal {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 475, 254);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 
 		JLabel lblNombre = new JLabel("Ingrese la palabra:");
-		lblNombre.setBounds(22, 23, 134, 14);
-		frame.getContentPane().add(lblNombre);
 
 		JLabel lblAmbientes = new JLabel("Seleccione la opci\u00F3n eseaa");
-		lblAmbientes.setBounds(258, 23, 143, 14);
-		frame.getContentPane().add(lblAmbientes);
 
 		btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(164, 162, 86, 35);
-		frame.getContentPane().add(btnEnviar);
 
 		btnMostrarResultados = new JButton("Mostrar Resultados");
-		btnMostrarResultados.setBounds(10, 162, 146, 35);
-		frame.getContentPane().add(btnMostrarResultados);
-
-		chckbxJava = new JCheckBox("Traucir palabra");
-		chckbxJava.setBounds(282, 44, 108, 35);
-		frame.getContentPane().add(chckbxJava);
-
-		chckbxWeb = new JCheckBox("Traucir oraci\u00F3n");
-		chckbxWeb.setBounds(282, 85, 108, 35);
-		frame.getContentPane().add(chckbxWeb);
 
 		txtNombrea = new JTextField();
-		txtNombrea.setBounds(10, 51, 233, 28);
-		frame.getContentPane().add(txtNombrea);
 		txtNombrea.setColumns(10);
+		
+		rdbtnNewRadioButton = new JRadioButton("Traucir palabra");
+		
+		rdbtnNewRadioButton_1 = new JRadioButton("Traucir oraci\u00F3n");
+		 //Group the radio buttons.
+	    ButtonGroup group = new ButtonGroup();
+	    group.add(rdbtnNewRadioButton);
+	    group.add(rdbtnNewRadioButton_1);
+		// Agregar listeners
+		btnMostrarResultados.addActionListener(new ManejadorEventos());
+		btnEnviar.addActionListener(new ManejadorEventos());
+		rdbtnNewRadioButton.addActionListener(new ManejadorEventos());
+		rdbtnNewRadioButton_1.addActionListener(new ManejadorEventos());
+
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addComponent(btnMostrarResultados, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+					.addGap(8)
+					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(rdbtnNewRadioButton_1)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(10)
+								.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(rdbtnNewRadioButton))
+							.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+								.addGap(22)
+								.addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+								.addGap(102)
+								.addComponent(lblAmbientes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNombre)
+						.addComponent(lblAmbientes))
+					.addGap(14)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnNewRadioButton))
+					.addGap(18)
+					.addComponent(rdbtnNewRadioButton_1)
+					.addGap(42)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnMostrarResultados, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
+		);
+		frame.getContentPane().setLayout(groupLayout);
 
 		// Agregar listeners
 		btnEnviar.addActionListener(new ManejadorEventos());
 		btnMostrarResultados.addActionListener(new ManejadorEventos());
-		chckbxJava.addActionListener(new ManejadorEventos());
-		chckbxWeb.addActionListener(new ManejadorEventos());
 	}
 	/**
 	 * Metodo simple para verificar si no se ingreso una opcion de implementacion
@@ -112,14 +157,7 @@ public class Principal {
 			System.exit(0);
 		}
 	}
-	/**
-	 * Metodo para instaciar la coleccion deseada.
-	 * @param tipo para seleccionar implementacion a usar
-	 */
-	static void listo(String tipo){
-		MapeoFactory  mapeoFactory = new Factory ();
-		Mapeo miMapeo = mapeoFactory.getMapeo(tipo);	
-	}
+
 
 	//Inner class para manejar eventos
 	private class ManejadorEventos implements ActionListener {
@@ -131,28 +169,32 @@ public class Principal {
 			//Para enviar datos, y asignar ambientes
 			if (e.getSource() == btnEnviar) {
 
-				if (chckbxJava.isSelected()) {
+				if (rdbtnNewRadioButton.isSelected()) {
 					opcion = true;
 				} else {
 					opcion = false;
 
 				}
-				if (chckbxWeb.isSelected()) {
+				if (rdbtnNewRadioButton_1.isSelected()) {
 					opcion1 = true;
 
 				} else {
 					opcion1 = false;
 
 				}
-				//Anadir elementos a coleccion
-				//id++;
-				//milogica.anadir(txtNombrea.getText(), opcion1,
-						//opcion, opcion2, id);
-
+				if (opcion==false &&opcion1==false){
+					JOptionPane.showMessageDialog(null, "Seleccione una opcion a traucir");
+				}
+				else {
+						tipo2 = JOptionPane.showInputDialog("Ingrese el irectorio: ");
+						dic.leerContenido(tipo2);
+						dic.llenarHash();
+					
+				}
 			}
 			//Desplegar resultados
 			if (e.getSource() == btnMostrarResultados) {
-				//milogica.desplegar();
+				System.out.println(dic.buscarArbol(txtNombrea.getText()));
 			}
 		}
 	}
