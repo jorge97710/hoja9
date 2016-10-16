@@ -1,12 +1,9 @@
 
 
 import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import hoja6.Fabricador;
-import hoja6.SetFactory;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,16 +15,15 @@ import javax.swing.JFrame;
  * @version 3.0 Septiembre 3, 2016 
  *  
  */
-public class Gui {
+public class Principal {
 	/*Atributos*/
 	static String tipo = "";
 	public boolean opcion = false, opcion1 = false, opcion2 = false;
 	private JButton btnEnviar, btnMostrarResultados;
 	private JFrame frame;
 	private JTextField txtNombrea;
-	private JCheckBox chckbxJava = new JCheckBox("Java");
-	private JCheckBox chckbxWeb = new JCheckBox("Web");
-	private JCheckBox chckbxMovil = new JCheckBox("Movil");
+	private JCheckBox chckbxJava = new JCheckBox("");
+	private JCheckBox chckbxWeb = new JCheckBox("");
 	private int id = 0;
 	
 
@@ -44,7 +40,7 @@ public class Gui {
 		tipo = JOptionPane.showInputDialog("Ingrese el tipo: ");
 		defensiva(tipo);
 		listo(tipo); 
-		Gui window = new Gui();
+		Principal window = new Principal();
 		window.frame.setVisible(true);
 
 	}
@@ -52,7 +48,7 @@ public class Gui {
 	/**
 	 * Crear la aplicacion
 	 */
-	public Gui() {
+	public Principal() {
 		initialize();
 	}
 
@@ -62,16 +58,16 @@ public class Gui {
 	private void initialize() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 361, 254);
+		frame.setBounds(100, 100, 475, 254);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(54, 23, 46, 14);
+		JLabel lblNombre = new JLabel("Ingrese la palabra:");
+		lblNombre.setBounds(22, 23, 134, 14);
 		frame.getContentPane().add(lblNombre);
 
-		JLabel lblAmbientes = new JLabel("Ambientes de desarrollo");
-		lblAmbientes.setBounds(164, 23, 143, 14);
+		JLabel lblAmbientes = new JLabel("Seleccione la opci\u00F3n eseaa");
+		lblAmbientes.setBounds(258, 23, 143, 14);
 		frame.getContentPane().add(lblAmbientes);
 
 		btnEnviar = new JButton("Enviar");
@@ -82,20 +78,16 @@ public class Gui {
 		btnMostrarResultados.setBounds(10, 162, 146, 35);
 		frame.getContentPane().add(btnMostrarResultados);
 
-		chckbxJava = new JCheckBox("Java");
-		chckbxJava.setBounds(164, 44, 108, 35);
+		chckbxJava = new JCheckBox("Traucir palabra");
+		chckbxJava.setBounds(282, 44, 108, 35);
 		frame.getContentPane().add(chckbxJava);
 
-		chckbxWeb = new JCheckBox("Web");
-		chckbxWeb.setBounds(164, 82, 108, 35);
+		chckbxWeb = new JCheckBox("Traucir oraci\u00F3n");
+		chckbxWeb.setBounds(282, 85, 108, 35);
 		frame.getContentPane().add(chckbxWeb);
 
-		chckbxMovil = new JCheckBox("Movil");
-		chckbxMovil.setBounds(164, 120, 108, 35);
-		frame.getContentPane().add(chckbxMovil);
-
 		txtNombrea = new JTextField();
-		txtNombrea.setBounds(10, 48, 134, 20);
+		txtNombrea.setBounds(10, 51, 233, 28);
 		frame.getContentPane().add(txtNombrea);
 		txtNombrea.setColumns(10);
 
@@ -104,14 +96,13 @@ public class Gui {
 		btnMostrarResultados.addActionListener(new ManejadorEventos());
 		chckbxJava.addActionListener(new ManejadorEventos());
 		chckbxWeb.addActionListener(new ManejadorEventos());
-		chckbxMovil.addActionListener(new ManejadorEventos());
 	}
 	/**
 	 * Metodo simple para verificar si no se ingreso una opcion de implementacion
 	 * adecuada.
 	 * @param s contiene el texto ingresado por el usuario
 	 */
-	void defensiva(String s) {
+	static void defensiva(String s) {
 		if (s == null) {
 			JOptionPane.showMessageDialog(null, "Gracias por usar el programa");
 			System.exit(0);
@@ -125,9 +116,9 @@ public class Gui {
 	 * Metodo para instaciar la coleccion deseada.
 	 * @param tipo para seleccionar implementacion a usar
 	 */
-	void listo(String tipo){
-		HFactory  = Fabricador.set();
-		miSet = Creasets.crearSet(tipo);	
+	static void listo(String tipo){
+		MapeoFactory  mapeoFactory = new Factory ();
+		Mapeo miMapeo = mapeoFactory.getMapeo(tipo);	
 	}
 
 	//Inner class para manejar eventos
@@ -153,25 +144,19 @@ public class Gui {
 					opcion1 = false;
 
 				}
-				if (chckbxMovil.isSelected()) {
-					opcion2 = true;
-
-				} else {
-					opcion2 = false;
-
-				}
 				//Anadir elementos a coleccion
-				id++;
-				milogica.anadir(txtNombrea.getText(), opcion1,
-						opcion, opcion2, id);
+				//id++;
+				//milogica.anadir(txtNombrea.getText(), opcion1,
+						//opcion, opcion2, id);
 
 			}
 			//Desplegar resultados
 			if (e.getSource() == btnMostrarResultados) {
-				milogica.desplegar();
+				//milogica.desplegar();
 			}
 		}
 	}
+}
 
 	
 

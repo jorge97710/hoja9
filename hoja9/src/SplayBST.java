@@ -11,7 +11,7 @@
  *  Written by Josh Israel.
  *
  ******************************************************************************/
-public class SplayBST<Key extends Comparable<Key>, Value>  {
+public class SplayBST<Key extends Comparable<Key>, Value> implements Mapeo {
 
     private Node root;   // root of the BST
 

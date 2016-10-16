@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @param <K> Llave
  * @param <V> Valor
  */
-public class Asociacion<K, V> implements Comparable<Asociacion<K, V>> {
+public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo {
 
 	private HashMap<K, V> dic;
 
@@ -39,7 +39,7 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>> {
 	 * @param key Es la llave a la cual se le asocia un valor
 	 * @return Falso o Verdadero de pendiendo en si existe una relacion en la que esta sea la llave
 	 */
-	public boolean containsKey(K key) {
+	public boolean contains(K key) {
 		if (dic.containsKey(key)) {
 			System.out.println("Si existe!");
 			return true;
