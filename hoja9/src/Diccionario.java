@@ -173,7 +173,7 @@ public class Diccionario {
 	 * Metodo para traducir la oracion 
 	 * @param dir
 	 */
-	void traducir(String dir) {
+	String traducir(String dir) {
 		String texto = "", traduccion = "";
 		int j = 0;
 		texto = leerContenido2(dir);
@@ -193,7 +193,7 @@ public class Diccionario {
 			}
 			j++;
 		}
-		System.out.println(traduccion);
+		return traduccion;
 
 	}
 

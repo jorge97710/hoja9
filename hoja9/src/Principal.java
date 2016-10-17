@@ -15,6 +15,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
 
 /**
  * @author Carlos Calderon, 15219
@@ -26,15 +28,16 @@ public class Principal {
 	/*Atributos*/
 	static String tipo = "",tipo2="",tipo3="";
 	public boolean opcion = false, opcion1 = false, opcion2 = false;
-	private JButton btnEnviar, btnMostrarResultados;
+	private JButton btnEnviar;
 	private JFrame frame;
 	private JTextField txtNombrea;
 	private JCheckBox chckbxJava = new JCheckBox("");
 	private JCheckBox chckbxWeb = new JCheckBox("");
 	private int id = 0;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
-	private static Diccionario dic = new Diccionario()  ;
+	private static  Diccionario dic = new Diccionario()  ;
+	private JTextField textField;
+	private JTextPane textPane;
+	private JScrollPane scrollPane;
 	
 	/**
 	 * Correr el programa 
@@ -67,80 +70,81 @@ public class Principal {
 	private void initialize() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 475, 254);
+		frame.setBounds(100, 100, 537, 414);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel lblNombre = new JLabel("Ingrese la palabra:");
-
-		JLabel lblAmbientes = new JLabel("Seleccione la opci\u00F3n eseaa");
+		JLabel lblNombre = new JLabel("Ingrese el directorio del diccionario:");
 
 		btnEnviar = new JButton("Enviar");
 
-		btnMostrarResultados = new JButton("Mostrar Resultados");
-
 		txtNombrea = new JTextField();
 		txtNombrea.setColumns(10);
-		
-		rdbtnNewRadioButton = new JRadioButton("Traucir palabra");
-		
-		rdbtnNewRadioButton_1 = new JRadioButton("Traucir oraci\u00F3n");
 		 //Group the radio buttons.
 	    ButtonGroup group = new ButtonGroup();
-	    group.add(rdbtnNewRadioButton);
-	    group.add(rdbtnNewRadioButton_1);
-		// Agregar listeners
-		btnMostrarResultados.addActionListener(new ManejadorEventos());
 		btnEnviar.addActionListener(new ManejadorEventos());
-		rdbtnNewRadioButton.addActionListener(new ManejadorEventos());
-		rdbtnNewRadioButton_1.addActionListener(new ManejadorEventos());
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		JLabel lblIngreseElDirectorio = new JLabel("Ingrese el directorio de oracion/palabra:");
+		
+		textPane = new JTextPane();
+		textPane.setEditable(false);
+		
+		scrollPane = new JScrollPane();
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
-					.addComponent(btnMostrarResultados, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addGap(8)
-					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(22)
+							.addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblIngreseElDirectorio, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(268, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(33, Short.MAX_VALUE)
+					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 465, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(196))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(rdbtnNewRadioButton_1)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(10)
-								.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(rdbtnNewRadioButton))
-							.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-								.addGap(22)
-								.addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-								.addGap(102)
-								.addComponent(lblAmbientes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(41)
+					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(394, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(23)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNombre)
-						.addComponent(lblAmbientes))
+					.addComponent(lblNombre)
 					.addGap(14)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-						.addComponent(rdbtnNewRadioButton))
-					.addGap(18)
-					.addComponent(rdbtnNewRadioButton_1)
-					.addGap(42)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnMostrarResultados, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
+					.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(lblIngreseElDirectorio)
+					.addGap(7)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(305, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(68))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 
 		// Agregar listeners
 		btnEnviar.addActionListener(new ManejadorEventos());
-		btnMostrarResultados.addActionListener(new ManejadorEventos());
 	}
 	/**
 	 * Metodo simple para verificar si no se ingreso una opcion de implementacion
@@ -169,48 +173,19 @@ public class Principal {
 			//Para enviar datos, y asignar ambientes
 			if (e.getSource() == btnEnviar) {
 
-				if (rdbtnNewRadioButton.isSelected()) {
-					opcion = true;
-				} else {
-					opcion = false;
+	
+						//tipo2 = JOptionPane.showInputDialog("Ingrese el Directorio del diccionario : ");
+						//tipo3 = JOptionPane.showInputDialog("Ingrese el Directorio de la oracion : ");
 
-				}
-				if (rdbtnNewRadioButton_1.isSelected()) {
-					opcion1 = true;
-
-				} else {
-					opcion1 = false;
-
-				}
-				if (opcion==false &&opcion1==false){
-					JOptionPane.showMessageDialog(null, "Seleccione una opcion a traucir");
-				}
-				else {
-						tipo2 = JOptionPane.showInputDialog("Ingrese el Directorio del diccionario : ");
-						tipo3 = JOptionPane.showInputDialog("Ingrese el Directorio de la oracion : ");
-
-						dic.leerContenido(tipo2);
+						dic.leerContenido(txtNombrea.getText());
 						if(tipo.equals("HS")){
 							dic.llenarHash();
+							textPane.setText(dic.traducir(textField.getText()));	
 						}
 						else if(tipo.equals("SP")){
 							dic.llenarArbol();
-						}
-						
-					
-				}
-			}
-			//Desplegar resultados
-			if (e.getSource() == btnMostrarResultados) {
-				if(tipo.equals("HS")){
-					System.out.println(dic.buscarHash(txtNombrea.getText()));	
-				}
-				else if (tipo.equals("SP")){
-					System.out.println(dic.buscarArbol(txtNombrea.getText()));	
-				}
-				dic.traducir(tipo3);
-				
-				
+							textPane.setText(dic.traducir(textField.getText()));
+						}			
 			}
 		}
 	}

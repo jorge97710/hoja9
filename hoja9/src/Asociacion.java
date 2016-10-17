@@ -41,10 +41,10 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo<K,V>
 	 */
 	public boolean contains(K key) {
 		if (dic.containsKey(key)) {
-			System.out.println("Si existe!");
+			//System.out.println("Si existe!");
 			return true;
 		} else {
-			System.out.println("No existe!");
+			//System.out.println("No existe!");
 			return false;
 		}
 	}
