@@ -24,7 +24,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class Principal {
 	/*Atributos*/
-	static String tipo = "",tipo2="";
+	static String tipo = "",tipo2="",tipo3="";
 	public boolean opcion = false, opcion1 = false, opcion2 = false;
 	private JButton btnEnviar, btnMostrarResultados;
 	private JFrame frame;
@@ -186,7 +186,9 @@ public class Principal {
 					JOptionPane.showMessageDialog(null, "Seleccione una opcion a traucir");
 				}
 				else {
-						tipo2 = JOptionPane.showInputDialog("Ingrese el irectorio: ");
+						tipo2 = JOptionPane.showInputDialog("Ingrese el Directorio del diccionario : ");
+						tipo3 = JOptionPane.showInputDialog("Ingrese el Directorio de la oracion : ");
+
 						dic.leerContenido(tipo2);
 						if(tipo.equals("HS")){
 							dic.llenarHash();
@@ -206,6 +208,8 @@ public class Principal {
 				else if (tipo.equals("SP")){
 					System.out.println(dic.buscarArbol(txtNombrea.getText()));	
 				}
+				dic.traducir(tipo3);
+				
 				
 			}
 		}

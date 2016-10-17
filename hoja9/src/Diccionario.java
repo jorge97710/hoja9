@@ -14,22 +14,27 @@ import javax.swing.JOptionPane;
  * 
  */
 public class Diccionario {
-	
-	//private SplayBST<String,String> cole = new SplayBST<String,String>();
-	//private Asociacion<String,String> cole2 = new Asociacion<String,String>();
+
+	// private SplayBST<String,String> cole = new SplayBST<String,String>();
+	// private Asociacion<String,String> cole2 = new
+	// Asociacion<String,String>();
 	private ArrayList<String> array = new ArrayList<String>();
+	private ArrayList<String> array2 = new ArrayList<String>();
 	static String textoArray[];
-	private MapeoFactory  mapeoFactory;
-	private  Mapeo <String,String> miMapeo;
-	
+	private MapeoFactory mapeoFactory;
+	private Mapeo<String, String> miMapeo;
+
 	/**
 	 * Metodo para instaciar la coleccion deseada.
-	 * @param tipo para seleccionar implementacion a usar
+	 * 
+	 * @param tipo
+	 *            para seleccionar implementacion a usar
 	 */
-	 void listo(String tipo){
-		mapeoFactory = new Factory ();
-		miMapeo = mapeoFactory.getMapeo(tipo);	
+	void listo(String tipo) {
+		mapeoFactory = new Factory();
+		miMapeo = mapeoFactory.getMapeo(tipo);
 	}
+
 	/**
 	 * Metodo que lee el contenido y lo pone en una sola linea. Este es con el
 	 * que se lee el texto que viene en ingles
@@ -52,6 +57,7 @@ public class Diccionario {
 
 		return texto;
 	}
+
 	/**
 	 * LeerContenido recibe como parametro el archivo donde estan los datos.
 	 * devuelve el texto que esta en la linea. si no se encuentra el archivo
@@ -74,93 +80,119 @@ public class Diccionario {
 		}
 		return array;
 	}
-	
+
 	/**
 	 * Llena el SplayTree
 	 */
-	void llenarArbol(){
+	void llenarArbol() {
 		String[] parts;
-		int co=0;
-		String part1="",part2="";
-		for (String i: array){
-			
-			for (int j=0;j<i.length();j++){
+		int co = 0;
+		String part1 = "", part2 = "";
+		for (String i : array) {
+
+			for (int j = 0; j < i.length(); j++) {
 				char c = i.charAt(j);
-				if (Character.isLetter(c)){
-					part1+=c;
-				}
-				else{
-					co=j;
+				if (Character.isLetter(c)) {
+					part1 += c;
+				} else {
+					co = j;
 					break;
-					
+
 				}
 			}
-			part2=i.substring(co);
-			//System.out.println("1"+part1);
-			//System.out.println("2"+part2);
-			miMapeo.put(part1,part2);
-			part1="";
+			part2 = i.substring(co);
+			// System.out.println("1"+part1);
+			// System.out.println("2"+part2);
+			miMapeo.put(part1, part2);
+			part1 = "";
 		}
 	}
+
 	/**
 	 * @param key
 	 * @return
 	 */
-	String buscarArbol(String key){
-		if (miMapeo.contains(key)){
+	String buscarArbol(String key) {
+		if (miMapeo.contains(key)) {
 			return miMapeo.get(key);
-		}
-		else{
+		} else {
 			return "No esta en el iccionario";
 		}
 	}
-	
+
 	/**
 	 * Llena el Hashmap
 	 */
-	void llenarHash(){
+	void llenarHash() {
 		String[] parts;
-		int co=0;
-		String part1="",part2="";
-		for (String i: array){
-			
-			for (int j=0;j<i.length();j++){
+		int co = 0;
+		String part1 = "", part2 = "";
+		for (String i : array) {
+
+			for (int j = 0; j < i.length(); j++) {
 				char c = i.charAt(j);
-				if (Character.isLetter(c)){
-					part1+=c;
-				}
-				else{
-					co=j;
+				if (Character.isLetter(c)) {
+					part1 += c;
+				} else {
+					co = j;
 					break;
-					
+
 				}
 			}
-			part2=i.substring(co);
-			//System.out.println("1"+part1);
-			//System.out.println("2"+part2);
-			miMapeo.put(part1,part2);
-			part1="";
-			//parts = i.split(" ",2);
-			
-			//part1 = parts[0];
-			//System.out.println("1"+part1);
-			//System.out.println(parts[1]);
-			//part2 = parts[1];
-			//System.out.println("2"+part2);
-			
+			part2 = i.substring(co);
+			// System.out.println("1"+part1);
+			// System.out.println("2"+part2);
+			miMapeo.put(part1, part2);
+			part1 = "";
+			// parts = i.split(" ",2);
+
+			// part1 = parts[0];
+			// System.out.println("1"+part1);
+			// System.out.println(parts[1]);
+			// part2 = parts[1];
+			// System.out.println("2"+part2);
+
 		}
 	}
-	
+
 	/**
 	 * @param key
 	 * @return
 	 */
-	String buscarHash(String key){
-		if (miMapeo.contains(key)){
+	String buscarHash(String key) {
+		if (miMapeo.contains(key)) {
 			return miMapeo.get(key);
-		}
-		else{
-			return "No esta en el iccionario";
+		} else {
+			return "No esta en el Diccionario";
 		}
 	}
+
+	/**
+	 * Metodo para traducir la oracion 
+	 * @param dir
+	 */
+	void traducir(String dir) {
+		String texto = "", traduccion = "";
+		int j = 0;
+		texto = leerContenido2(dir);
+		textoArray = texto.split(" ");
+		for (String i : textoArray) {
+			array2.add(i);
+
+		}
+
+		for (String i : textoArray) {
+
+			if (miMapeo.contains(array2.get(j))) {
+				traduccion += miMapeo.get(array2.get(j));
+			} else {
+				traduccion += "*" + array2.get(j) + "*";
+
+			}
+
+		}
+		System.out.println(traduccion);
+
+	}
+
 }
