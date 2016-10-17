@@ -101,6 +101,7 @@ public class Diccionario {
 				}
 			}
 			part2 = i.substring(co);
+			part2.trim();
 			// System.out.println("1"+part1);
 			// System.out.println("2"+part2);
 			miMapeo.put(part1, part2);
@@ -140,6 +141,7 @@ public class Diccionario {
 				}
 			}
 			part2 = i.substring(co);
+			part2.trim();
 			// System.out.println("1"+part1);
 			// System.out.println("2"+part2);
 			miMapeo.put(part1, part2);
@@ -189,7 +191,7 @@ public class Diccionario {
 				traduccion += "*" + array2.get(j) + "*";
 
 			}
-
+			j++;
 		}
 		System.out.println(traduccion);
 
