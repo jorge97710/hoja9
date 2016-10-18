@@ -74,21 +74,30 @@ public class Diccionario {
 			BufferedReader ar = new BufferedReader(new FileReader(archivo));
 			while ((bfRead = ar.readLine()) != null) {
 				array.add(bfRead);
+				System.out.println(bfRead);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se encontro archivo");
 		}
+
+		// pruebas
+
 		return array;
 	}
 
 	/**
-	 * Llena el SplayTree
+	 * Metodo que crea el arbol o hashmap (segun seleccionado) lleno de las
+	 * palabras con key=palabra en ingles value=palabra en español ignorando a
+	 * partir de cuando hay un corchete para mostrar en la traduccion solo la
+	 * palabra y no el tipo de esta
+	 * 
+	 * @param archivo
 	 */
-	void llenarArbol() {
-		String[] parts;
-		int co = 0;
-		String part1 = "", part2 = "";
-		for (String i : array) {
+	void crear(String archivo) {
+		for (String i : leerContenido(archivo)) {
+			String[] parts;
+			int co = 0;
+			String part1 = "", part2 = "";
 
 			for (int j = 0; j < i.length(); j++) {
 				char c = i.charAt(j);
@@ -100,14 +109,73 @@ public class Diccionario {
 
 				}
 			}
-			part2 = i.substring(co);
+
+			int coma = 0, espacio = 0, corchete = 0, diagonal = 0, primero = 0;
+
+			i.trim();
+
+			corchete = i.indexOf("[");
+
+			if (corchete > 0) {
+				part2 = i.substring(co, corchete);
+			} else {
+				part2 = i.substring(co);
+			}
+
 			part2.trim();
-			// System.out.println("1"+part1);
-			// System.out.println("2"+part2);
+
+			System.out.println("1" + part1);
+			System.out.println("2" + part2);
 			miMapeo.put(part1, part2);
 			part1 = "";
+			part2 = "";
+
 		}
+
+		// pruebas
+
 	}
+
+	/**
+	 * Llena el SplayTree
+	 */
+	// void llenarArbol() {
+	// System.out.println("se llena");
+	//
+	// String[] parts;
+	// int co = 0;
+	// String part1 = "", part2 = "";
+	// for (String i : array) {
+	//
+	// for (int j = 0; j < i.length(); j++) {
+	// char c = i.charAt(j);
+	// if (Character.isLetter(c)) {
+	// part1 += c;
+	// } else {
+	// co = j;
+	// break;
+	//
+	// }
+	// }
+	//
+	// int coma = 0, espacio = 0, corchete = 0, diagonal = 0, primero = 0;
+	//
+	// i.trim();
+	// coma = i.indexOf(",");
+	// espacio = i.indexOf(" ");
+	// corchete = i.indexOf("[");
+	// diagonal = i.indexOf("/");
+	// primero = Math.min(Math.min(Math.min(coma, espacio), corchete),
+	// diagonal);
+	// part2 = i.substring(co, primero - 1);
+	// part2.trim();
+	//
+	// // System.out.println("1"+part1);
+	// // System.out.println("2"+part2);
+	// miMapeo.put(part1, part2);
+	// part1 = "";
+	// }
+	// }
 
 	/**
 	 * @param key
@@ -124,38 +192,50 @@ public class Diccionario {
 	/**
 	 * Llena el Hashmap
 	 */
-	void llenarHash() {
-		String[] parts;
-		int co = 0;
-		String part1 = "", part2 = "";
-		for (String i : array) {
-
-			for (int j = 0; j < i.length(); j++) {
-				char c = i.charAt(j);
-				if (Character.isLetter(c)) {
-					part1 += c;
-				} else {
-					co = j;
-					break;
-
-				}
-			}
-			part2 = i.substring(co);
-			part2.trim();
-			// System.out.println("1"+part1);
-			// System.out.println("2"+part2);
-			miMapeo.put(part1, part2);
-			part1 = "";
-			// parts = i.split(" ",2);
-
-			// part1 = parts[0];
-			// System.out.println("1"+part1);
-			// System.out.println(parts[1]);
-			// part2 = parts[1];
-			// System.out.println("2"+part2);
-
-		}
-	}
+	// void llenarHash() {
+	// System.out.println("se llena");
+	//
+	// String[] parts;
+	// int co = 0;
+	// String part1 = "", part2 = "";
+	// for (String i : array) {
+	//
+	// for (int j = 0; j < i.length(); j++) {
+	// char c = i.charAt(j);
+	// if (Character.isLetter(c)) {
+	// part1 += c;
+	// } else {
+	// co = j;
+	// break;
+	//
+	// }
+	// }
+	// int coma = 0, espacio = 0, corchete = 0, diagonal = 0, primero = 0;
+	//
+	// i.trim();
+	// coma = i.indexOf(",");
+	// espacio = i.indexOf(" ");
+	// corchete = i.indexOf("[");
+	// diagonal = i.indexOf("/");
+	// primero = Math.min(Math.min(Math.min(coma, espacio), corchete),
+	// diagonal);
+	// part2 = i.substring(co, primero - 1);
+	// part2.trim();
+	//
+	// // System.out.println("1"+part1);
+	// // System.out.println("2"+part2);
+	// miMapeo.put(part1, part2);
+	// part1 = "";
+	// // parts = i.split(" ",2);
+	//
+	// // part1 = parts[0];
+	// // System.out.println("1"+part1);
+	// // System.out.println(parts[1]);
+	// // part2 = parts[1];
+	// // System.out.println("2"+part2);
+	//
+	// }
+	// }
 
 	/**
 	 * @param key
@@ -170,7 +250,8 @@ public class Diccionario {
 	}
 
 	/**
-	 * Metodo para traducir la oracion 
+	 * Metodo para traducir la oracion
+	 * 
 	 * @param dir
 	 */
 	String traducir(String dir) {
@@ -184,15 +265,16 @@ public class Diccionario {
 		}
 
 		for (String i : textoArray) {
-
 			if (miMapeo.contains(array2.get(j))) {
-				traduccion += miMapeo.get(array2.get(j));
+				traduccion += miMapeo.get(array2.get(j)).trim() + " ";
 			} else {
-				traduccion += "*" + array2.get(j) + "*";
+				traduccion += "*" + array2.get(j).trim() + "*" + " ";
 
 			}
 			j++;
 		}
+		System.out.println(traduccion);
+
 		return traduccion;
 
 	}

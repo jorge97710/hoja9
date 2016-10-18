@@ -10,10 +10,13 @@ import java.util.HashMap;
 /**
  * @author Jorge Andres
  * @author Carlos Calderon
- * @param <K> Llave
- * @param <V> Valor
+ * @param <K>
+ *            Llave
+ * @param <V>
+ *            Valor
  */
-public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo<K,V> {
+public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,
+		Mapeo<K, V> {
 
 	private HashMap<K, V> dic;
 
@@ -36,21 +39,24 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo<K,V>
 	}
 
 	/**
-	 * @param key Es la llave a la cual se le asocia un valor
-	 * @return Falso o Verdadero de pendiendo en si existe una relacion en la que esta sea la llave
+	 * @param key
+	 *            Es la llave a la cual se le asocia un valor
+	 * @return Falso o Verdadero de pendiendo en si existe una relacion en la
+	 *         que esta sea la llave
 	 */
 	public boolean contains(K key) {
 		if (dic.containsKey(key)) {
-			//System.out.println("Si existe!");
+			// System.out.println("Si existe!");
 			return true;
 		} else {
-			//System.out.println("No existe!");
+			// System.out.println("No existe!");
 			return false;
 		}
 	}
 
 	/**
-	 * @param key  Es la llave a la cual se le asocia un valor
+	 * @param key
+	 *            Es la llave a la cual se le asocia un valor
 	 * @return dic.get(key) Es el valor que tiene asociado la llave
 	 */
 	public V get(K key) {
@@ -58,13 +64,15 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,Mapeo<K,V>
 	}
 
 	/**
-	 * @param key  Es la llave a la cual se le asocia un valor
-	 * @param value Es el valor a ingresar como asociado a la llave
+	 * @param key
+	 *            Es la llave a la cual se le asocia un valor
+	 * @param value
+	 *            Es el valor a ingresar como asociado a la llave
 	 */
 
 	@Override
 	public void put(K key, V value) {
 		dic.put(key, value);
-		
+
 	}
 }
