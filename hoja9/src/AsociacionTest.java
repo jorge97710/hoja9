@@ -3,16 +3,17 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * @author JorgeAndres
- * @author carlos calderon
- * @version 1
- * 
+ * @author Jorge Azmitia , 15202
+ * @author Carlos Calderon,15219
+ * @version 1.0
+ * Clase para probar los metodos de insercion y busqueda para HashMap.
  */
 public class AsociacionTest {
+	/* Atributos*/
 	public Asociacion<String, String> arbol = new Asociacion<String, String>();
-
+	
 	/**
-	 * 
+	 * Probar metodo de busqueda.
 	 */
 	@Test
 	public void testGet() {
@@ -21,7 +22,7 @@ public class AsociacionTest {
 	}
 
 	/**
-	 * 
+	 * Probar metodo de insercion.
 	 */
 	@Test
 	public void testPut() {

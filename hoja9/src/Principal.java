@@ -16,34 +16,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 /**
  * @author Carlos Calderon, 15219
  * @author Jorge Azmitia,15202
- * @version 3.0 Septiembre 3, 2016
+ * @version 1.0
+ * GUI para dar la interfaz al usuario
  * 
  */
 public class Principal {
-	// Inner class para manejar eventos
-	private class ManejadorEventos implements ActionListener {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
-		 * )
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// Para enviar datos, y asignar ambientes
-			if (e.getSource() == btnEnviar) {
-
-				dic.crear(txtNombrea.getText());
-				textPane.setText(dic.traducir(textField.getText()));
-
-			}
-		}
-	}
-
+	
 	/* Atributos */
 	static String tipo = "", tipo2 = "", tipo3 = "";
 	private static Diccionario dic = new Diccionario();
+	public boolean opcion = false, opcion1 = false, opcion2 = false;
+	private JButton btnEnviar;
+	private JFrame frame;
+	private JTextField txtNombrea;
+	private JTextField textField;
+	private JTextPane textPane;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Metodo simple para verificar si no se ingreso una opcion de
@@ -64,7 +52,7 @@ public class Principal {
 	}
 
 	/**
-	 * Correr el programa
+	 * Metodo main para correr el programa
 	 */
 	public static void main(String[] args) {
 
@@ -80,17 +68,6 @@ public class Principal {
 		window.frame.setVisible(true);
 
 	}
-
-	public boolean opcion = false, opcion1 = false, opcion2 = false;
-	private JButton btnEnviar;
-	private JFrame frame;
-	private JTextField txtNombrea;
-
-	private JTextField textField;
-
-	private JTextPane textPane;
-
-	private JScrollPane scrollPane;
 
 	/**
 	 * Crear la aplicacion
@@ -130,116 +107,78 @@ public class Principal {
 		scrollPane = new JScrollPane();
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								groupLayout
-										.createSequentialGroup()
-										.addGap(10)
-										.addGroup(
-												groupLayout
-														.createParallelGroup(
-																Alignment.LEADING,
-																false)
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addGap(22)
-																		.addComponent(
-																				lblNombre,
-																				GroupLayout.PREFERRED_SIZE,
-																				189,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addGap(10)
-																		.addGroup(
-																				groupLayout
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addComponent(
-																								textField,
-																								GroupLayout.PREFERRED_SIZE,
-																								233,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								lblIngreseElDirectorio,
-																								GroupLayout.PREFERRED_SIZE,
-																								205,
-																								GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								txtNombrea,
-																								GroupLayout.PREFERRED_SIZE,
-																								233,
-																								GroupLayout.PREFERRED_SIZE))))
-										.addContainerGap(268, Short.MAX_VALUE))
-						.addGroup(
-								Alignment.TRAILING,
-								groupLayout
-										.createSequentialGroup()
-										.addContainerGap(33, Short.MAX_VALUE)
-										.addComponent(textPane,
-												GroupLayout.PREFERRED_SIZE,
-												465, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED)
-										.addComponent(scrollPane,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(196))
-						.addGroup(
-								groupLayout
-										.createSequentialGroup()
-										.addGap(41)
-										.addComponent(btnEnviar,
-												GroupLayout.PREFERRED_SIZE, 86,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(394, Short.MAX_VALUE)));
-		groupLayout
-				.setVerticalGroup(groupLayout
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(
-								groupLayout
-										.createSequentialGroup()
-										.addGap(23)
-										.addComponent(lblNombre)
-										.addGap(14)
-										.addComponent(txtNombrea,
-												GroupLayout.PREFERRED_SIZE, 28,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(6)
-										.addComponent(lblIngreseElDirectorio)
-										.addGap(7)
-										.addComponent(textField,
-												GroupLayout.PREFERRED_SIZE, 28,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(26)
-										.addComponent(btnEnviar,
-												GroupLayout.PREFERRED_SIZE, 35,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												ComponentPlacement.RELATED, 35,
-												Short.MAX_VALUE)
-										.addComponent(textPane,
-												GroupLayout.PREFERRED_SIZE,
-												134, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())
-						.addGroup(
-								Alignment.TRAILING,
-								groupLayout
-										.createSequentialGroup()
-										.addContainerGap(305, Short.MAX_VALUE)
-										.addComponent(scrollPane,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(68)));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 465, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(196))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(41)
+					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(552, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(20)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(lblIngreseElDirectorio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addGap(12)
+									.addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap(239, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(268, Short.MAX_VALUE))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(lblNombre)
+					.addGap(14)
+					.addComponent(txtNombrea, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblIngreseElDirectorio)
+					.addGap(7)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(btnEnviar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+					.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(305, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(68))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 
 		// Agregar listeners
 		btnEnviar.addActionListener(new ManejadorEventos());
 	}
+	// Inner class para manejar eventos
+		private class ManejadorEventos implements ActionListener {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+			 * )
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Para enviar datos, y asignar ambientes
+				if (e.getSource() == btnEnviar) {
+
+					dic.crear(txtNombrea.getText());
+					textPane.setText(dic.traducir(textField.getText()));
+
+				}
+			}
+		}
 }

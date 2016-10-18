@@ -37,13 +37,9 @@ public class Diccionario {
 		return texto;
 	}
 
-	// private SplayBST<String,String> cole = new SplayBST<String,String>();
-	// private Asociacion<String,String> cole2 = new
-	// Asociacion<String,String>();
 	private ArrayList<String> array = new ArrayList<String>();
 	private ArrayList<String> array2 = new ArrayList<String>();
 	private MapeoFactory mapeoFactory;
-
 	private Mapeo<String, String> miMapeo;
 
 	/**

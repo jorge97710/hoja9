@@ -1,29 +1,21 @@
 import java.util.HashMap;
-
-/*
- *Jorge Azmitia 15202
-
-
- *Carlos Calderon 15219
- *Clase que se encarga de hacer las asociaciones entre las palabras
- * 
- * */
-
 /**
- * @author Jorge Andres
- * @author Carlos Calderon
+ * @author Jorge Azmitia,15202
+ * @author Carlos Calderon,15219
  * @param <K>
  *            Llave
  * @param <V>
  *            Valor
+ * Clase que representa la asociacion entre key y value utilizando HashMap.
  */
 public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,
 		Mapeo<K, V> {
 
+	/*Atributos*/
 	private HashMap<K, V> dic;
 
 	/**
-	 * 
+	 * Constructor inicializa atributos
 	 */
 	public Asociacion() {
 		dic = new HashMap<K, V>();
