@@ -1,21 +1,17 @@
-
-import javax.swing.JLabel;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
+import java.awt.event.ActionListener;
+
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * @author Carlos Calderon, 15219
@@ -24,19 +20,48 @@ import javax.swing.JScrollPane;
  * 
  */
 public class Principal {
+	// Inner class para manejar eventos
+	private class ManejadorEventos implements ActionListener {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
+		 * )
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// Para enviar datos, y asignar ambientes
+			if (e.getSource() == btnEnviar) {
+
+				dic.crear(txtNombrea.getText());
+				textPane.setText(dic.traducir(textField.getText()));
+
+			}
+		}
+	}
+
 	/* Atributos */
 	static String tipo = "", tipo2 = "", tipo3 = "";
-	public boolean opcion = false, opcion1 = false, opcion2 = false;
-	private JButton btnEnviar;
-	private JFrame frame;
-	private JTextField txtNombrea;
-	private JCheckBox chckbxJava = new JCheckBox("");
-	private JCheckBox chckbxWeb = new JCheckBox("");
-	private int id = 0;
 	private static Diccionario dic = new Diccionario();
-	private JTextField textField;
-	private JTextPane textPane;
-	private JScrollPane scrollPane;
+
+	/**
+	 * Metodo simple para verificar si no se ingreso una opcion de
+	 * implementacion adecuada.
+	 * 
+	 * @param s
+	 *            contiene el texto ingresado por el usuario
+	 */
+	static void defensiva(String s) {
+		if (s == null) {
+			JOptionPane.showMessageDialog(null, "Gracias por usar el programa");
+			System.exit(0);
+		} else if (!(s.equalsIgnoreCase("HS") || s.equalsIgnoreCase("SP"))) {
+			JOptionPane.showMessageDialog(null,
+					"No ha ingresado una opcion valida");
+			System.exit(0);
+		}
+	}
 
 	/**
 	 * Correr el programa
@@ -55,6 +80,17 @@ public class Principal {
 		window.frame.setVisible(true);
 
 	}
+
+	public boolean opcion = false, opcion1 = false, opcion2 = false;
+	private JButton btnEnviar;
+	private JFrame frame;
+	private JTextField txtNombrea;
+
+	private JTextField textField;
+
+	private JTextPane textPane;
+
+	private JScrollPane scrollPane;
 
 	/**
 	 * Crear la aplicacion
@@ -205,45 +241,5 @@ public class Principal {
 
 		// Agregar listeners
 		btnEnviar.addActionListener(new ManejadorEventos());
-	}
-
-	/**
-	 * Metodo simple para verificar si no se ingreso una opcion de
-	 * implementacion adecuada.
-	 * 
-	 * @param s
-	 *            contiene el texto ingresado por el usuario
-	 */
-	static void defensiva(String s) {
-		if (s == null) {
-			JOptionPane.showMessageDialog(null, "Gracias por usar el programa");
-			System.exit(0);
-		} else if (!(s.equalsIgnoreCase("HS") || s.equalsIgnoreCase("SP"))) {
-			JOptionPane.showMessageDialog(null,
-					"No ha ingresado una opcion valida");
-			System.exit(0);
-		}
-	}
-
-	// Inner class para manejar eventos
-	private class ManejadorEventos implements ActionListener {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent
-		 * )
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// Para enviar datos, y asignar ambientes
-			if (e.getSource() == btnEnviar) {
-
-			
-				dic.crear(txtNombrea.getText());
-				textPane.setText(dic.traducir(textField.getText()));
-
-			}
-		}
 	}
 }

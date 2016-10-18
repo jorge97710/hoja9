@@ -11,9 +11,7 @@
  *
  ******************************************************************************/
 public class SplayBST<Key extends Comparable<Key>, Value> implements
-		Mapeo<Key, Value> {
-
-	private Node root; // root of the BST
+Mapeo<Key, Value> {
 
 	// BST helper node data type
 	private class Node {
@@ -26,6 +24,8 @@ public class SplayBST<Key extends Comparable<Key>, Value> implements
 			this.value = value;
 		}
 	}
+
+	private Node root; // root of the BST
 
 	public boolean contains(Key key) {
 		return get(key) != null;
@@ -40,6 +40,21 @@ public class SplayBST<Key extends Comparable<Key>, Value> implements
 			return root.value;
 		else
 			return null;
+	}
+
+	/***************************************************************************
+	 * Helper functions.
+	 ***************************************************************************/
+
+	// height of tree (1-node tree has height 0)
+	public int height() {
+		return height(root);
+	}
+
+	private int height(Node x) {
+		if (x == null)
+			return -1;
+		return 1 + Math.max(height(x.left), height(x.right));
 	}
 
 	/***************************************************************************
@@ -114,6 +129,33 @@ public class SplayBST<Key extends Comparable<Key>, Value> implements
 		// else: it wasn't in the tree to remove
 	}
 
+	// left rotate
+	private Node rotateLeft(Node h) {
+		Node x = h.right;
+		h.right = x.left;
+		x.left = h;
+		return x;
+	}
+
+	// right rotate
+	private Node rotateRight(Node h) {
+		Node x = h.left;
+		h.left = x.right;
+		x.right = h;
+		return x;
+	}
+
+	public int size() {
+		return size(root);
+	}
+
+	private int size(Node x) {
+		if (x == null)
+			return 0;
+		else
+			return 1 + size(x.left) + size(x.right);
+	}
+
 	/***************************************************************************
 	 * Splay tree function.
 	 * **********************************************************************/
@@ -171,48 +213,6 @@ public class SplayBST<Key extends Comparable<Key>, Value> implements
 
 		else
 			return h;
-	}
-
-	/***************************************************************************
-	 * Helper functions.
-	 ***************************************************************************/
-
-	// height of tree (1-node tree has height 0)
-	public int height() {
-		return height(root);
-	}
-
-	private int height(Node x) {
-		if (x == null)
-			return -1;
-		return 1 + Math.max(height(x.left), height(x.right));
-	}
-
-	public int size() {
-		return size(root);
-	}
-
-	private int size(Node x) {
-		if (x == null)
-			return 0;
-		else
-			return 1 + size(x.left) + size(x.right);
-	}
-
-	// right rotate
-	private Node rotateRight(Node h) {
-		Node x = h.left;
-		h.left = x.right;
-		x.right = h;
-		return x;
-	}
-
-	// left rotate
-	private Node rotateLeft(Node h) {
-		Node x = h.right;
-		h.right = x.left;
-		x.left = h;
-		return x;
 	}
 
 	// test client

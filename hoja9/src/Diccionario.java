@@ -1,9 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
@@ -15,25 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Diccionario {
 
-	// private SplayBST<String,String> cole = new SplayBST<String,String>();
-	// private Asociacion<String,String> cole2 = new
-	// Asociacion<String,String>();
-	private ArrayList<String> array = new ArrayList<String>();
-	private ArrayList<String> array2 = new ArrayList<String>();
 	static String textoArray[];
-	private MapeoFactory mapeoFactory;
-	private Mapeo<String, String> miMapeo;
-
-	/**
-	 * Metodo para instaciar la coleccion deseada.
-	 * 
-	 * @param tipo
-	 *            para seleccionar implementacion a usar
-	 */
-	void listo(String tipo) {
-		mapeoFactory = new Factory();
-		miMapeo = mapeoFactory.getMapeo(tipo);
-	}
 
 	/**
 	 * Metodo que lee el contenido y lo pone en una sola linea. Este es con el
@@ -58,6 +37,78 @@ public class Diccionario {
 		return texto;
 	}
 
+	// private SplayBST<String,String> cole = new SplayBST<String,String>();
+	// private Asociacion<String,String> cole2 = new
+	// Asociacion<String,String>();
+	private ArrayList<String> array = new ArrayList<String>();
+	private ArrayList<String> array2 = new ArrayList<String>();
+	private MapeoFactory mapeoFactory;
+
+	private Mapeo<String, String> miMapeo;
+
+	/**
+	 * Metodo que revisa si existe una asociacion. si existe regresa el valor y
+	 * si nno dice que no esta
+	 * 
+	 * @param key
+	 * @return
+	 */
+	String buscarHash(String key) {
+		if (miMapeo.contains(key)) {
+			return miMapeo.get(key);
+		} else {
+			return "No esta en el Diccionario";
+		}
+	}
+
+	/**
+	 * Metodo que crea el arbol o hashmap (segun seleccionado) lleno de las
+	 * palabras con key=palabra en ingles value=palabra en español ignorando a
+	 * partir de cuando hay un corchete para mostrar en la traduccion solo la
+	 * palabra y no el tipo de esta
+	 * 
+	 * @param archivo
+	 */
+	void crear(String archivo) {
+		for (String i : leerContenido(archivo)) {
+			int co = 0;
+			String part1 = "", part2 = "";
+
+			for (int j = 0; j < i.length(); j++) {
+				char c = i.charAt(j);
+				if (Character.isLetter(c)) {
+					part1 += c;
+				} else {
+					co = j;
+					break;
+
+				}
+			}
+
+			int corchete = 0;
+
+			i.trim();
+
+			corchete = i.indexOf("[");
+
+			if (corchete > 0) {
+				part2 = i.substring(co, corchete);
+			} else {
+				part2 = i.substring(co);
+			}
+
+			part2.trim();
+
+			// System.out.println("1" + part1);
+			// System.out.println("2" + part2);
+			miMapeo.put(part1, part2);
+			part1 = "";
+			part2 = "";
+
+		}
+
+	}
+
 	/**
 	 * LeerContenido recibe como parametro el archivo donde estan los datos.
 	 * devuelve el texto que esta en la linea. si no se encuentra el archivo
@@ -74,7 +125,7 @@ public class Diccionario {
 			BufferedReader ar = new BufferedReader(new FileReader(archivo));
 			while ((bfRead = ar.readLine()) != null) {
 				array.add(bfRead);
-				//System.out.println(bfRead);
+				// System.out.println(bfRead);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se encontro archivo");
@@ -84,70 +135,21 @@ public class Diccionario {
 	}
 
 	/**
-	 * Metodo que crea el arbol o hashmap (segun seleccionado) lleno de las
-	 * palabras con key=palabra en ingles value=palabra en español ignorando a
-	 * partir de cuando hay un corchete para mostrar en la traduccion solo la
-	 * palabra y no el tipo de esta
+	 * Metodo para instaciar la coleccion deseada.
 	 * 
-	 * @param archivo
+	 * @param tipo
+	 *            para seleccionar implementacion a usar
 	 */
-	void crear(String archivo) {
-		for (String i : leerContenido(archivo)) {
-			String[] parts;
-			int co = 0;
-			String part1 = "", part2 = "";
-
-			for (int j = 0; j < i.length(); j++) {
-				char c = i.charAt(j);
-				if (Character.isLetter(c)) {
-					part1 += c;
-				} else {
-					co = j;
-					break;
-
-				}
-			}
-
-			int coma = 0, espacio = 0, corchete = 0, diagonal = 0, primero = 0;
-
-			i.trim();
-
-			corchete = i.indexOf("[");
-
-			if (corchete > 0) {
-				part2 = i.substring(co, corchete);
-			} else {
-				part2 = i.substring(co);
-			}
-
-			part2.trim();
-
-			//System.out.println("1" + part1);
-			//System.out.println("2" + part2);
-			miMapeo.put(part1, part2);
-			part1 = "";
-			part2 = "";
-
-		}
-
-
-	}
-
-
-	/**
-	 * @param key
-	 * @return
-	 */
-	String buscarHash(String key) {
-		if (miMapeo.contains(key)) {
-			return miMapeo.get(key);
-		} else {
-			return "No esta en el Diccionario";
-		}
+	void listo(String tipo) {
+		mapeoFactory = new Factory();
+		miMapeo = mapeoFactory.getMapeo(tipo);
 	}
 
 	/**
-	 * Metodo para traducir la oracion
+	 * Metodo para traducir la oracion Primero lee el txt que contiene la
+	 * oracion y lo agrega a un array. luego va buscando si existe la key que es
+	 * la palabra en ingles, si esta existe la sustituye por su valor, y si no
+	 * exsite simplemente la copia y la pone dentro de asteriscos
 	 * 
 	 * @param dir
 	 */
@@ -170,7 +172,7 @@ public class Diccionario {
 			}
 			j++;
 		}
-		//System.out.println(traduccion);
+		// System.out.println(traduccion);
 
 		return traduccion;
 

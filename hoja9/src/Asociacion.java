@@ -2,6 +2,8 @@ import java.util.HashMap;
 
 /*
  *Jorge Azmitia 15202
+
+
  *Carlos Calderon 15219
  *Clase que se encarga de hacer las asociaciones entre las palabras
  * 
@@ -39,6 +41,8 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,
 	}
 
 	/**
+	 * Revisa si existe o no una llave
+	 * 
 	 * @param key
 	 *            Es la llave a la cual se le asocia un valor
 	 * @return Falso o Verdadero de pendiendo en si existe una relacion en la
@@ -55,6 +59,8 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,
 	}
 
 	/**
+	 * Devuelve el valor asociado a una llave
+	 * 
 	 * @param key
 	 *            Es la llave a la cual se le asocia un valor
 	 * @return dic.get(key) Es el valor que tiene asociado la llave
@@ -64,6 +70,8 @@ public class Asociacion<K, V> implements Comparable<Asociacion<K, V>>,
 	}
 
 	/**
+	 * Inserta una nueva llave con un valor asociado
+	 * 
 	 * @param key
 	 *            Es la llave a la cual se le asocia un valor
 	 * @param value

@@ -1,7 +1,13 @@
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
+/**
+ * @author JorgeAndres
+ * @author carlos calderon
+ * @version 1
+ * 
+ */
 public class SplayBSTTest {
 	public SplayBST<String, String> arbol = new SplayBST<String, String>();
 

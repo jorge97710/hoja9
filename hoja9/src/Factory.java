@@ -1,9 +1,9 @@
-import java.util.HashSet;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.TreeSet;
-
+/**
+ * @author JorgeAndres
+ * @author carlos calderon
+ * @version 1
+ * 
+ */
 public class Factory implements MapeoFactory {
 
 	public Mapeo getMapeo(String tipoMapeo) {
