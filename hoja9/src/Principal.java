@@ -239,32 +239,8 @@ public class Principal {
 			// Para enviar datos, y asignar ambientes
 			if (e.getSource() == btnEnviar) {
 
-				// tipo2 =
-				// JOptionPane.showInputDialog("Ingrese el Directorio del diccionario : ");
-				// tipo3 =
-				// JOptionPane.showInputDialog("Ingrese el Directorio de la oracion : ");
-
-				// dic.leerContenido(txtNombrea.getText());----------------------------------------
-				// dic.leerContenido("C:\\Users\\JorgeAndres\\Desktop\\Spanish.txt");
-				// --------------------------
-				// dic.crear("C:\\Users\\JorgeAndres\\Desktop\\Spanish.txt");--------------------
+			
 				dic.crear(txtNombrea.getText());
-				// ESTE TENDRIA QUE SER dic.crear(txtNombrea.getText());
-				/*
-				 * if(tipo.equals("HS")){ dic.llenarHash();
-				 * //textPane.setText(dic.traducir(textField.getText()));
-				 * textPane.setText(dic.traducir(
-				 * "C:\\Users\\JorgeAndres\\Desktop\\oracion.txt")); } else
-				 * if(tipo.equals("SP")){ dic.llenarArbol();
-				 * //textPane.setText(dic.traducir(textField.getText()));
-				 * textPane.setText(dic.traducir(
-				 * "C:\\Users\\JorgeAndres\\Desktop\\oracion.txt"));
-				 * 
-				 * }
-				 */
-				// ------------------------textPane.setText(dic.traducir("C:\\Users\\JorgeAndres\\Desktop\\oracion.txt"));---------------
-				// ESTE SERIA EL NECESARIO
-				// textPane.setText(dic.traducir(textField.getText()));
 				textPane.setText(dic.traducir(textField.getText()));
 
 			}
