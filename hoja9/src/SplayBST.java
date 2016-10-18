@@ -7,7 +7,7 @@
  *
  * Written by Josh Israel.
  * 
- * @param <K>
+ * @param <Key>
  *
  ******************************************************************************/
 public class SplayBST<Key extends Comparable<Key>, Value> implements

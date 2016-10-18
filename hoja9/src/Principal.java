@@ -51,8 +51,10 @@ public class Principal {
 		}
 	}
 
+
 	/**
 	 * Metodo main para correr el programa
+	 * @param args .
 	 */
 	public static void main(String[] args) {
 
